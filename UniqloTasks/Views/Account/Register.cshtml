@@ -1,0 +1,155 @@
+﻿@model RegisterVM
+
+@{
+    ViewData["Title"] = "Login";
+}
+<style>
+
+    .login-page {
+        width: 360px;
+        padding: 8% 0 0;
+        margin: auto;
+    }
+
+    .form {
+        position: relative;
+        z-index: 1;
+        background: #1b1c1b;
+        max-width: 360px;
+        margin: 0 auto 100px;
+        padding: 45px;
+        text-align: center;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        border-radius: 20px
+        
+
+    }
+
+        .form input {
+            font-family: "Roboto", sans-serif;
+            outline: 0;
+            background: #f2f2f2;
+            width: 100%;
+            border: 0;
+            margin: 0 0 15px;
+            padding: 15px;
+            box-sizing: border-box;
+            font-size: 14px;
+            border-radius: 15px;
+        }
+
+        .form button {
+            font-family: "Roboto", sans-serif;
+            text-transform: uppercase;
+            outline: 0;
+            background: #047857;
+            width: 100%;
+            border: 0;
+            padding: 15px;
+            color: #FFFFFF;
+            font-size: 14px;
+            -webkit-transition: all 0.3 ease;
+            transition: all 0.3 ease;
+            cursor: pointer;
+            border-radius: 15px;
+        }
+
+            .form button:hover, .form button:active, .form button:focus {
+                background: #047857;
+            }
+
+        .form .message {
+            margin: 15px 0 0;
+            color: #b3b3b3;
+            font-size: 12px;
+        }
+
+            .form .message a {
+                color: #4CAF50;
+                text-decoration: none;
+            }
+
+        .form .register-form {
+            display: none;
+        }
+
+    .container {
+        position: relative;
+        z-index: 1;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+        .container:before, .container:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        .container .info {
+            margin: 50px auto;
+            text-align: center;
+        }
+
+            .container .info h1 {
+                margin: 0 0 15px;
+                padding: 0;
+                font-size: 36px;
+                font-weight: 300;
+                color: #1a1a1a;
+            }
+
+            .container .info span {
+                color: #4d4d4d;
+                font-size: 12px;
+            }
+
+                .container .info span a {
+                    color: #000000;
+                    text-decoration: none;
+                }
+
+                .container .info span .fa {
+                    color: #EF3B3A;
+                }
+                #ft{
+                    display: none;
+                }
+                #header{
+        display: none;
+    }
+
+    body {
+        background: #E3FCEF; /* fallback for old browsers */
+        background: #E3FCEF;
+        background: linear-gradient(90deg, #E3FCEF 0%,#E3FCEF ) 50%);
+        font-family: "Roboto", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+</style>
+
+<div class="login-page">
+    <div class="form">
+
+        <form class="login-form" method="post">
+            <input asp-for="Fullname" placeholder="Fullname" />
+            <span asp-validation-for="Fullname" class="text-danger"></span>
+            <input asp-for="Username" placeholder="Username" />
+            <span asp-validation-for="Username" class="text-danger"></span>
+            <input asp-for="Email" placeholder="Email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+            <input asp-for="Password" placeholder="Password" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+            <input asp-for="RePassword" placeholder="Repeat password" />
+            <span asp-validation-for="RePassword" class="text-danger"></span>
+            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+            <p class="message">Have an account?<a asp-controller="account" asp-action="login">Login an account</a></p>
+
+            <button>Register</button>
+        </form>
+    </div>
+</div>
+<script src="~/assets/js//register.js"></script>
+

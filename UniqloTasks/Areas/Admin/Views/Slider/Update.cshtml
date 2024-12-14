@@ -1,0 +1,35 @@
+﻿@model Slider
+
+@{
+    ViewData["Title"] = "Update";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Product create</h6>
+    </div>
+    <div class="card-body">
+        <form id="islepls" enctype="multipart/form-data" method="post">
+            <div class="form-group">
+                <label asp-for="Title"></label>
+                <input class="form-control" asp-for="Title">
+                <span class="text-danger" asp-validation-for="Title"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Subtitle"></label>
+                <textarea class="form-control" asp-for="Subtitle"></textarea>
+                <span class="text-danger" asp-validation-for="Subtitle"></span>
+            </div>
+            <div class="form-group">
+                <div class="d-flex">
+                    <img width="80px" src="~/imgs/products/@Model.ImageUrl" />
+                </div>
+                <label asp-for="ImageUrl">Cover image</label>
+                <input accept="image/*" class="form-control" asp-for="ImageUrl">
+                <span class="text-danger" asp-validation-for="ImageUrl"></span>
+            </div>
+           
+            <button onclick="$('#islepls').submit()" type="submit" asp-controller="Slider" asp-action="index" class="btn btn-primary my-2">Update</button>
+        </form>
+    </div>
+</div>

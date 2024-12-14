@@ -1,0 +1,183 @@
+﻿@model HomeVM
+
+@{
+    ViewData["Title"] = "Ana səhifə";
+}
+<!-- Start Slider Area -->
+<div class="slider__container slider--four">
+    <div class="slider__activation__wrap owl-carousel owl-theme">
+        @foreach (var item in Model.Sliders)
+        {
+            <div class="slide slider__fixed--height" style="background: rgba(0, 0, 0, 0) url(../imgs/sliders/@item.ImgUrl) no-repeat scroll center center / cover ;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-9 offset-sm-3 col-md-6 offset-md-6 col-lg-5 offset-lg-7">
+                            <div class="slider__content">
+                                <div class="slider__inner">
+                                    <h1 class="text-light">@item.Title</h1>
+                                    <h4 class="text-light">@item.Subtitle</h4>
+                                    <div class="slider__btn">
+                                        <a class="htc__btn" href="cart.html">shop now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<!-- End Slider Area -->
+<div class="custop__container bg__cat--2 mt--100">
+    <div class="popular__product--2">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section__title section__title--2 text-center">
+                        <h2 class="title__line">Popular Products</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod temp incididunt ut labore et dolore magna aliqua. </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Start Product MEnu -->
+            <div class="htc__product__container product__with__filter  pb--20">
+                <div class="row mt--70">
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                        <div class="filter__menu__container">
+                            <div class="product__menu">
+                                <button data-filter="*" class="is-checked">All</button>
+                                @foreach (var item in Model.Brands)
+                                {
+                                    <button data-filter=".@item.Id">@item.Name</button>
+
+                                }
+                              
+                            </div>
+                            <div class="filter__box">
+                                <a class="filter__menu" href="#/">filter</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Start Filter Menu -->
+                <div class="filter__wrap">
+                    <div class="filter__cart">
+                        <div class="filter__cart__inner">
+                            <div class="filter__menu__close__btn">
+                                <a href="#"><i class="zmdi zmdi-close"></i></a>
+                            </div>
+                            <div class="filter__content">
+                                <!-- Start Single Content -->
+                                <div class="fiter__content__inner">
+                                    <div class="single__filter">
+                                        <h2>Sort By</h2>
+                                        <ul class="filter__list">
+                                            <li><a href="#default">Default</a></li>
+                                            <li><a href="#accessories">Accessories</a></li>
+                                            <li><a href="#bags">Bags</a></li>
+                                            <li><a href="#chair">Chair</a></li>
+                                            <li><a href="#decoration">Decoration</a></li>
+                                            <li><a href="#fashion">Fashion</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="single__filter">
+                                        <h2>Size</h2>
+                                        <ul class="filter__list">
+                                            <li><a href="#xxl">XXL</a></li>
+                                            <li><a href="#xl">XL</a></li>
+                                            <li><a href="#x">X</a></li>
+                                            <li><a href="#l">L</a></li>
+                                            <li><a href="#m">M</a></li>
+                                            <li><a href="#s">S</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="single__filter">
+                                        <h2>Tags</h2>
+                                        <ul class="filter__list">
+                                            <li><a href="#">All</a></li>
+                                            <li><a href="#">Accessories</a></li>
+                                            <li><a href="#">Bags</a></li>
+                                            <li><a href="#">Chair</a></li>
+                                            <li><a href="#">Decoration</a></li>
+                                            <li><a href="#">Fashion</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="single__filter">
+                                        <h2>Price</h2>
+                                        <ul class="filter__list">
+                                            <li><a href="#">$0.00 - $50.00</a></li>
+                                            <li><a href="#">$50.00 - $100.00</a></li>
+                                            <li><a href="#">$100.00 - $150.00</a></li>
+                                            <li><a href="#">$150.00 - $200.00</a></li>
+                                            <li><a href="#">$300.00 - $500.00</a></li>
+                                            <li><a href="#">$500.00 - $700.00</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="single__filter">
+                                        <h2>Color</h2>
+                                        <ul class="filter__list sidebar__list">
+                                            <li class="black"><a href="#"><i class="zmdi zmdi-circle"></i>Black</a></li>
+                                            <li class="blue"><a href="#"><i class="zmdi zmdi-circle"></i>Blue</a></li>
+                                            <li class="brown"><a href="#"><i class="zmdi zmdi-circle"></i>Brown</a></li>
+                                            <li class="red"><a href="#"><i class="zmdi zmdi-circle"></i>Red</a></li>
+                                            <li class="orange"><a href="#"><i class="zmdi zmdi-circle"></i>Orange</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- End Single Content -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Filter Menu -->
+                <!-- End Product MEnu -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="popular__product__container product__list clearfix">
+                            <!-- Start Single Product -->
+                            @foreach (var item in Model.PopularProducts)
+                            {
+                                <div class="single__pro cat--@item.BrandId">
+                                    <div class="product">
+                                        <div class="product__inner">
+                                            <div class="pro__thumb">
+                                                <a asp-action="Details" asp-controller="Shop" asp-route-id="@item.Id">
+                                                    <img width="225px" height="282px" src="~/imgs/products/@item.CoverImage" alt="product images">
+                                                </a>
+                                            </div>
+                                            <div class="popular__product__hover__info">
+                                                <ul class="product__action">
+                                                    <li><a title="Add To Wishlist" href="wishlist.html"><span class="ti-heart"></span></a></li>
+                                                    <li><a data-bs-toggle="modal" data-bs-target="#productModal" title="Quick View" class="quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
+                                                    <li>
+                                                        <a asp-action="Addbasket" asp-controller="Shop" asp-route-id="@item.Id" title="Add To Cart">
+                                                            <span class="ti-shopping-cart"></span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product__details">
+                                            <h2><a asp-action="Details" asp-controller="Shop" asp-route-id="@item.Id">@item.Name</a></h2>
+                                            @if (item.Discount > 0)
+                                            {
+                                                <del class="old__prize">$@item.SellPrice</del>
+                                                <span class="popular__pro__prize text-danger">$@(item.SellPrice - item.SellPrice * item.Discount / 100)</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="popular__pro__prize text-danger">$@item.SellPrice</span>
+
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

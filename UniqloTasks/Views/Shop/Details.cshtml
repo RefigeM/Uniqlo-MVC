@@ -1,0 +1,142 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Product Details";
+    int img_tab = 2;
+}
+
+<div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(../assets/images/bg/2.jpg) no-repeat scroll center center / cover ;">
+    <div class="ht__bradcaump__wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="bradcaump__inner text-center">
+                        <h2 class="bradcaump-title">Product Details</h2>
+                        <nav class="bradcaump-inner">
+                            <a class="breadcrumb-item" asp-action="Index" asp-controller="Home">Home</a>
+                            <span class="brd-separetor">/</span>
+                            <span class="breadcrumb-item active">Product Details</span>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Bradcaump area -->
+<!-- Start Product Details -->
+<section class="htc__product__details pt--120 pb--100 bg__white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-6 col-sm-12">
+                <div class="product__details__container">
+                    <!-- Start Small images -->
+                    <ul class="nav product__small__images" role="tablist">
+                        <li role="presentation" class="pot-small-img">
+                            <a class="active" href="#img-tab-1" role="tab" data-bs-toggle="tab">
+                                <img width="120px" src="~/imgs/products/@Model.CoverImage" alt="small-image">
+                            </a>
+                        </li>
+                        @foreach (var item in Model.Images?.Select(x => x.ImageUrl) ?? [])
+                        {
+                            <li role="presentation" class="pot-small-img">
+                                <a class="active" href="#img-tab-@(img_tab++)" role="tab" data-bs-toggle="tab">
+                                    <img width="120px" src="~/imgs/products/@item" alt="small-image">
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                    <!-- End Small images -->
+                    <div class="product__big__images">
+                        <div class="portfolio-full-image tab-content">
+                            <div role="tabpanel" class="tab-pane active salam" id="img-tab-1">
+                                <img width="480px" src="~/imgs/products/@Model.CoverImage" alt="full-image">
+                            </div>
+                            @{
+                                img_tab = 2;
+                            }
+                            @foreach (var item in Model.Images?.Select(x => x.ImageUrl) ?? [])
+                            {
+                                <div role="tabpanel" class="tab-pane" id="img-tab-@(img_tab++)">
+                                    <img src="~/imgs/products/@item" alt="full-image">
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-6 col-sm-12 smt-30 xmt-30">
+                <div class="htc__product__details__inner">
+                    <div class="pro__detl__title">
+                        <h2>@Model.Name</h2>
+                    </div>
+                    @if (User.Identity?.IsAuthenticated ?? false)
+                    {
+                        <form asp-action="Rate">
+                            <input type="hidden" name="productId" value="@Model.Id" />
+                            <input type="number" name="rate" min="1" max="5" value="@ViewBag.Rating" /> <button class="btn btn-outline-info">Rate</button>
+
+                        </form>
+                    }
+                    <div class="pro__dtl__rating">
+
+                        <ul class="pro__rating">
+                            @if (Model.ProductRatings.Any())
+                            {
+                                var averageRating = Model.ProductRatings.Average(x => x.RatingRate);
+                                for (int i = 0; i < Math.Ceiling(averageRating); i++)
+                                {
+                                    <li><i class="fas fa-star" style="color: gold;"></i></li>
+                                }
+                            }
+                            else
+                            {
+                                <p>No ratings available.</p>
+                            }
+
+                        </ul>
+                        <span class="rat__qun">(Based on @Model.ProductRatings.Count Ratings)</span>
+                    </div>
+                    <div class="pro__details">
+                        <p>@Model.Description</p>
+                    </div>
+                    <ul class="pro__dtl__prize">
+                        @if (Model.Discount > 0)
+                        {
+                            <li class="old__prize">$@Model.SellPrice</li>
+                            <li>$@(Model.SellPrice * (100 - Model.Discount) / 100)</li>
+                        }
+                        else
+                        {
+                            <li>$@Model.SellPrice</li>
+                        }
+                    </ul>
+                    <div class="product-action-wrap">
+                        <div class="prodict-statas"><span>Quantity :</span></div>
+                        <div class="product-quantity">
+                            <form id='myform' method='POST' action='#'>
+                                <div class="product-quantity">
+                                    <div class="cart-plus-minus">
+                                        <input class="cart-plus-minus-box" type="text" name="qtybutton" value="02">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <ul class="pro__dtl__btn">
+                        <li class="buy__now__btn"><a href="#">buy now</a></li>
+                        <li><a href="#"><span class="ti-heart"></span></a></li>
+                        <li><a href="#"><span class="ti-email"></span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <script>
+        $('.product__small__images img').click(function() {
+            $('.salam img').attr("src", $(this).attr("src"));
+        })
+    </script>
+}

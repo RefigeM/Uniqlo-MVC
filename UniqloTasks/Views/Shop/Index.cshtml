@@ -1,0 +1,197 @@
+﻿@model ShopVM
+
+@{
+    ViewData["Title"] = "Shop";
+}
+
+@section style {
+    <style>
+        .cat-input:checked + label {
+            color: red;
+        }
+    </style>
+}
+<div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(../assets/images/bg/2.jpg) no-repeat scroll center center / cover ;">
+    <div class="ht__bradcaump__wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="bradcaump__inner text-center">
+                        <h2 class="bradcaump-title">Shop Sidebar</h2>
+                        <nav class="bradcaump-inner">
+                            <a class="breadcrumb-item" href="index.html">Home</a>
+                            <span class="brd-separetor">/</span>
+                            <span class="breadcrumb-item active">Shop Sidebar</span>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Bradcaump area -->
+<!-- Start Our ShopSide Area -->
+<section class="htc__shop__sidebar bg__white ptb--120">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-3 order-lg-1 order-2 col-sm-12">
+                <form asp-action="Index" asp-controller="Shop" method="GET">
+                    <div class="htc__shop__left__sidebar">
+                        <!-- Start Range -->
+                        <div class="htc-grid-range">
+                            <h4 class="section-title-4">FILTER BY PRICE</h4>
+                            <div class="content-shopby">
+                                <div class="price_filter s-filter clear">
+                                    <div min-val="0" max-val="200" id="slider-range"></div>
+                                    <div class="slider__range--output">
+                                        <div class="price__output--wrap">
+                                            <div class="price--output">
+                                                <span>Price :</span><input name="amount" type="text" id="amount" readonly>
+                                            </div>
+                                            <div class="price--filter">
+                                                <button class="btn">Filter</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Range -->
+                        <!-- Start Product Cat -->
+                        <div class="htc__shop__cat">
+                            <h4 class="section-title-4">PRODUCT CATEGORIES</h4>
+                            <ul class="sidebar__list">
+                                <li>
+                                    <input name="catId" class="d-none cat-input" type="radio" id="cat-0" />
+                                    <label style="cursor:pointer" class="d-flex justify-content-between" for="cat-0">Hamısı <span>@Model.ProductCount</span></label>
+                                </li>
+                                @foreach (var item in Model.Brands)
+                                {
+                                <li>
+                                    <input name="catId" class="d-none cat-input" type="radio" value="@item.Id" id="cat-@item.Id" />
+                                    <label style="cursor:pointer" class="d-flex justify-content-between" for="cat-@item.Id">@item.Name <span>@item.Count</span></label>
+                                </li>
+                                    <li>
+                                        <input name="catId" class="d-none cat-input" type="radio" value="@item.Id" id="cat-@item.Id" />
+                                        <label style="cursor:pointer" class="d-flex justify-content-between" for="cat-@item.Id">@item.Name <span>@item.Count</span></label>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        <!-- End Product Cat -->
+                </form>
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-9 order-lg-2 order-1 col-sm-12 col-xs-12 smt-30">
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                    <div class="producy__view__container">
+                        <!-- Start Short Form -->
+                        <div class="product__list__option">
+                            <div class="order-single-btn">
+                                <select class="select-color selectpicker">
+                                    <option>Sort by newness</option>
+                                    <option>Match</option>
+                                    <option>Updated</option>
+                                    <option>Title</option>
+                                    <option>Category</option>
+                                    <option>Rating</option>
+                                </select>
+                            </div>
+                            <div class="shp__pro__show">
+                                <span>Showing 1 - 4 of @Model.ProductCount results</span>
+                            </div>
+                        </div>
+                        <!-- End Short Form -->
+
+                    </div>
+                </div>
+            </div>
+            <div class="tab-contet shop__grid__view__wrap">
+                <!-- Start Single View -->
+                <div role="tabpanel" id="grid-view" class="row single-grid-view tab-pane  active clearfix">
+                    @foreach (var item in Model.Products)
+                    {
+                        <!-- Start Single Product -->
+                    <div class="col-md-4 col-lg-4 col-sm-12">
+                        <div class="product">
+                            <div class="product__inner">
+                                <div class="pro__thumb">
+                                    <a href="#">
+                                        <img src="~/imgs/products/@item.CoverImage" alt="product images">
+                                    </a>
+                                </div>
+                                <div class="product__hover__info">
+                                    <ul class="product__action">
+                                        <li><a title="Add To Cart" href="cart.html"><span class="ti-shopping-cart"></span></a></li>
+                                    </ul>
+                                </div>
+                                <div class="add__to__wishlist">
+                                    <a data-bs-toggle="tooltip" title="Add To Wishlist" class="add-to-cart" href="wishlist.html"><span class="ti-heart"></span></a>
+                                </div>
+                            </div>
+                            <div class="product__details">
+                                <h2><a href="product-details.html">@item.Name</a></h2>
+                                <ul class="product__price">
+                                    @if (item.Discount > 0)
+                                        {
+                                    <li class="old__price">$@item.SellPrice</li>
+                                    <li class="new__price">$@(item.SellPrice - item.SellPrice * item.Discount / 100)</li>
+                                        }
+                                        else
+                                        {
+                                    <li class="new__price">$@item.SellPrice</li>
+
+                                        }
+                                    @* <li class="old__price">$16.00</li>
+                                        <li class="new__price">$10.00</li> *@
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="col-md-4 col-lg-4 col-sm-12">
+                            <div class="product">
+                                <div class="product__inner">
+                                    <div class="pro__thumb">
+                                        <a href="#">
+                                            <img src="~/imgs/products/@item.CoverImage" alt="product images">
+                                        </a>
+                                    </div>
+                                    <div class="product__hover__info">
+                                        <ul class="product__action">
+                                            <li><a title="Add To Cart" href="cart.html"><span class="ti-shopping-cart"></span></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="add__to__wishlist">
+                                        <a data-bs-toggle="tooltip" title="Add To Wishlist" class="add-to-cart" href="wishlist.html"><span class="ti-heart"></span></a>
+                                    </div>
+                                </div>
+                                <div class="product__details">
+                                    <h2><a href="product-details.html">@item.Name</a></h2>
+                                    <ul class="product__price">
+                                        @if (item.Discount > 0)
+                                        {
+                                            <li class="old__price">$@item.SellPrice</li>
+                                            <li class="new__price">$@(item.SellPrice - item.SellPrice * item.Discount / 100)</li>
+                                        }
+                                        else
+                                        {
+                                            <li class="new__price">$@item.SellPrice</li>
+
+                                        }
+                                        @* <li class="old__price">$16.00</li>
+                                    <li class="new__price">$10.00</li> *@
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Product -->
+                    }
+                </div>
+                <!-- End Single View -->
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
